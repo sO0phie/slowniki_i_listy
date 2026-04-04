@@ -32,7 +32,7 @@ def main():
         elif inp == "r":
             data.print_all_data(loaded_data)
         elif inp == "t":
-           pass
+           users.add_or_remove_grades(loaded_data)
         elif inp == "y":
             pass
         elif inp == "u":
