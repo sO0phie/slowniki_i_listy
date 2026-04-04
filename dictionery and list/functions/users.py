@@ -21,17 +21,12 @@ def add_new_user(data: list[dict])-> dict:
     }
     
 def add_or_remove_grades(data: list[dict])->None:
-    ocena = int(input("Ocena: "))
-    data.append(ocena)
-    if len(data) > 0:
-        inp = input("Czy usunąć jakąś ocenę? ")
-        if inp == "tak":
-            print(data)
-            data.pop(input("Ocena do usunięcia: "))
-        elif inp == "nie":
-            pass
-        else:
-            print("Nie ma takiej komendy")
+    oceny = []
+    razy = int(input("Ile razy chcesz dodać ocenę? "))
+    for _ in range(razy):
+        ocena = int(input("Ocena: "))
+        oceny.append(ocena)
+    data.append(oceny)
     # The function allows you to modify a given student's grades
 
 
