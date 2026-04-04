@@ -32,9 +32,7 @@ def main():
         elif inp == "r":
             data.print_all_data(loaded_data)
         elif inp == "t":
-            ocena = users.add_or_remove_grades(loaded_data)
-            loaded_data.append(ocena)
-            data.save_data(loaded_data)
+           pass
         elif inp == "y":
             pass
         elif inp == "u":
