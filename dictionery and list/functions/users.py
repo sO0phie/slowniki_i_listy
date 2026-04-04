@@ -20,15 +20,27 @@ def add_new_user(data: list[dict])-> dict:
         "grades english":[]        
     }
     
-def add_or_remove_grades(data: list[dict])->None:
+def add_or_remove_grades(data: list[dict])-> None:
     oceny = []
-    razy = int(input("Ile razy chcesz dodać ocenę? "))
-    for _ in range(razy):
-        ocena = int(input("Ocena: "))
-        oceny.append(ocena)
-    data.append(oceny)
-    # The function allows you to modify a given student's grades
-
-
+    id = int(input("ID użytkownika --- "))
+    for user in data:
+        if user["id"] == id:
+            choice = input("a - dodanie oceny, b - usunięcie")
+            if choice == "a":
+                subject:str = input("m - matematyka, p - polski, a - angielski")
+                if subject == "m":
+                    ocena = int(input("Podaj ocenę z matematyki: "))
+                    user["grades mathematics"].append(ocena)
+                elif subject == "p":
+                    ocena = int(input("Podaj ocenę z polskiego: "))
+                    user["grades polish"].append(ocena)
+                elif subject == "a":
+                    ocena = int(input("Podaj ocenę z angielskiego: "))
+                    user["grades english"].append(ocena)
+                else:
+                    print("Nieprawidłowy przedmiot")
+        else:
+            pass
+        
 
 
