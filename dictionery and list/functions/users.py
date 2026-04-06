@@ -122,3 +122,75 @@ def update_user_birth_date(data: list[dict], user_id: int, new_birth_date: str) 
             return True
     else:
         return False
+
+def is_name_taken(data: list[dict], name: str, surname: str) -> bool:
+    for user in data:
+        if user.get("name") == name and user.get("surname") == surname:
+            print("Taki użytkownik już istnieje")
+            return True
+        print("Taki użytkownik nie istnieje")
+        return False
+
+def show_one_user(user: dict, id:int) -> None:
+    for el in user:
+        if el.get("id") == id:
+            print("==="*20)
+            for k,v in el.items():
+                print(f'{k} ----- {v}')
+
+def count_all_users(data: list[dict]) -> int:
+    print(f'Liczba użytkowników zapisanych w systemie: {len(data)}')
+    return len(data)
+
+def count_users_with_missing_name(data: list[dict]) -> int:
+    bez_imienia = 0
+    for user in data:
+        if user.get("name") == None:
+            bez_imienia += 1
+    print(f'Ilość użytkowników bez imienia wynosi: {bez_imienia}')
+    return bez_imienia
+
+def average_math_for_user(data: list[dict], id:int) -> float | None:
+    for user in data:
+        if user.get("id") == id:
+            if len(user.get("grades mathematics")) > 0:
+                srednia = sum(user.get("grades mathematics")) / len(user.get("grades mathematics"))
+                print(f'Średnia ocen z matematyki dla tego użytkownika wynosi: {srednia}')
+                return srednia
+            else:
+                print("Użytkownik nie ma ocen z danego przedmiotu")
+                return None
+            
+def average_polish_for_user(data: list[dict], id:int) -> float | None:
+    for user in data:
+        if user.get("id") == id:
+            if len(user.get("grades polish")) > 0:
+                srednia = sum(user.get("grades polish")) / len(user.get("grades polish"))
+                print(f'Średnia ocen z polskiego dla tego użytkownika wynosi: {srednia}')
+                return srednia
+            else:
+                print("Użytkownik nie ma ocen z danego przedmiotu")
+                return None
+            
+def average_english_for_user(data: list[dict], id:int) -> float | None:
+    for user in data:
+        if user.get("id") == id:
+            if len(user.get("grades english")) > 0:
+                srednia = sum(user.get("grades english")) / len(user.get("grades english"))
+                print(f'Średnia ocen z angielskiego dla tego użytkownika wynosi: {srednia}')
+                return srednia
+            else:
+                print("Użytkownik nie ma ocen z danego przedmiotu")
+                return None
+
+def overall_average_for_user(data: list[dict], id:int ) -> float | None:
+    for user in data:
+        if user.get("id") == id:
+            oceny = user.get("grades mathematics") + user.get("grades polish") + user.get("grades english")
+            if len(oceny) > 0:
+                srednia = sum(oceny) / len(oceny)
+                print(f'Średnia ocen ze wszystkich przedmiotów wynosi: {srednia}')
+                return srednia
+            else:
+                print("Użytkownik nie ma ocen")
+                return False
