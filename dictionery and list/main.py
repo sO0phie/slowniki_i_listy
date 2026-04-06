@@ -18,6 +18,14 @@ def program_menu()->None:
     u - update user's name
     k - update user's surname
     l - update user's birth date
+    m - check if name and surname is taken
+    n - show one user 
+    p - number of users stored in data
+    q - number of users with None or empty name
+    a - average grade from the user's mathematics list
+    b - average grade from the user's polish list
+    c - average grade from the user's english list
+    d - average from all user's grades
     \n
     ================================================
     """)
@@ -62,7 +70,34 @@ def main():
             new_birth_date = str(input("Wpisz nową datę urodzenia użytkownika "))
             users.update_user_birth_date(loaded_data, user_id, new_birth_date)
         elif inp == "m":
+            name:str = input("Wpisz imie użytkownika ")
+            surname:str = input("Wpisz nazwisko użytkownika ")
+            users.is_name_taken(loaded_data, name, surname)
+        elif inp == "n":
+            user_id = int(input("Wpisz ID użytkownika "))
+            users.show_one_user(loaded_data , user_id)
+        elif inp == "p":
+            users.count_all_users(loaded_data)
+        elif inp == "q":
+            users.count_users_with_missing_name(loaded_data)
+        elif inp == "a":
+            user_id = int(input("Wpisz ID użytkownika: "))
+            users.average_math_for_user(loaded_data, user_id)
+        elif inp == "b":
+            user_id = int(input("Wpisz ID użytkownika: "))
+            users.average_polish_for_user(loaded_data, user_id)
+        elif inp == "c":
+            user_id = int(input("Wpisz ID użytkownika: "))
+            users.average_english_for_user(loaded_data,user_id)
+        elif inp == "d":
+            user_id = int(input("Wpisz ID użytkownika: "))
+            users.overall_average_for_user(loaded_data, user_id)
+        elif inp == "f":
+            subject:str = input("math - matematyka, polish - polski, english - angielski ")
+            users.best_student_in_subject(loaded_data, subject)
+        elif inp == "g":
             pass
+
         else:
             os.system("cls" if os.name == "nt" else "clear")
             print("There is no such command")
