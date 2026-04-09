@@ -26,6 +26,8 @@ def program_menu()->None:
     b - average grade from the user's polish list
     c - average grade from the user's english list
     d - average from all user's grades
+    f - best student in one subject
+    g - average grade in one subject for all users
     \n
     ================================================
     """)
@@ -96,8 +98,8 @@ def main():
             subject:str = input("math - matematyka, polish - polski, english - angielski ")
             users.best_student_in_subject(loaded_data, subject)
         elif inp == "g":
-            pass
-
+            subject:str = input("math - matematyka, polish - polski, english - angielski ")
+            users.subject_average_for_all_users(loaded_data, subject)
         else:
             os.system("cls" if os.name == "nt" else "clear")
             print("There is no such command")
