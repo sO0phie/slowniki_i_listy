@@ -76,16 +76,22 @@ def find_user_by_id(data: list[dict], user_id: int) -> dict | None:
     return None
 
 def find_users_by_name(data: list[dict], name: str) -> list[dict]:
+    users = []
+    nothing = []
     for user in data:
         if user.get("name") == name:
-            print(f'{user}')
-            return user
+            users.append(user.get("name"))
         elif user.get("name") == None:
-            print(f'{user}')
-            return user
+            nothing.append(user.get("name"))
+    if len(users) > 0:
+        print(f'Znaleziono {len(users)} użytkowników o imieniu {name}')
+        return users
+    elif len(nothing) > 0:
+        print(f'Znaleziono {len(nothing)} użytkowników bez imienia')
+        return nothing
     else:
-        print("nie ma takiego użytkownika")
-
+        print("Nie znaleziono użytkowników o takim imieniu")
+        
 def delete_user_by_id(data: list[dict], user_id: int) -> bool:
     for user in data:
         if user.get("id") == user_id:
@@ -194,3 +200,49 @@ def overall_average_for_user(data: list[dict], id:int ) -> float | None:
             else:
                 print("Użytkownik nie ma ocen")
                 return False
+
+def best_student_in_subject(data: list[dict], subject: str) -> dict | None:
+    highest_average = 0
+    best_student = None
+    subject_name = None
+    for user in data:
+        if subject == "math" and len(user.get('grades mathematics')) > 0:
+            math = sum(user.get("grades mathematics")) / len(user.get("grades mathematics"))
+            if math > highest_average:
+                highest_average = math
+                best_student = user.get("name")
+                subject_name = "matematyki"
+        elif subject == "polish" and len(user.get('grades polish')) > 0:
+            polish = sum(user.get("grades polish")) / len(user.get("grades polish"))
+            if polish > highest_average:
+                highest_average = polish
+                best_student = user.get("name")
+                subject_name = "polskiego"
+        elif subject == "english" and len(user.get('grades english')) > 0:
+            english = sum(user.get("grades english")) / len(user.get("grades english"))
+            if english > highest_average:
+                highest_average = english
+                best_student = user.get("name")
+                subject_name = "angielskiego"
+    print(f"Największą średnią z {subject_name} ma {best_student}")
+
+def subject_average_for_all_users(data: list[dict], subject: str) -> float | None:
+    oceny = 0
+    ilosc_ocen = 0
+    przedmiot_name = None
+    average = 0
+    for user in data:
+        if subject == "math" and len(user.get('grades mathematics')) > 0:
+            oceny += sum(user.get("grades mathematics"))
+            ilosc_ocen += len(user.get("grades mathematics"))
+            przedmiot_name = "matematyki"
+        elif subject == "polish" and len(user.get('grades polish')) > 0:
+            oceny += sum(user.get("grades polish"))
+            ilosc_ocen += len(user.get("grades polish"))
+            przedmiot_name = "polskiego"
+        elif subject == "english" and len(user.get('grades english')) > 0:
+            oceny += sum(user.get("grades english"))
+            ilosc_ocen += len(user.get("grades english"))
+            przedmiot_name = "angielskiego"
+    average = oceny / ilosc_ocen
+    print(f'Średnia ocen wszystkich użytkowników z {przedmiot_name} wynosi {average}')
