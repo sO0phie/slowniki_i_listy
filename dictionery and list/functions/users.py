@@ -225,7 +225,7 @@ def best_student_in_subject(data: list[dict], subject: str) -> dict | None:
                 best_student = user.get("name")
                 subject_name = "angielskiego"
     print(f"Największą średnią z {subject_name} ma {best_student}")
-
+    return best_student
 def subject_average_for_all_users(data: list[dict], subject: str) -> float | None:
     oceny = 0
     ilosc_ocen = 0
@@ -246,3 +246,4 @@ def subject_average_for_all_users(data: list[dict], subject: str) -> float | Non
             przedmiot_name = "angielskiego"
     average = oceny / ilosc_ocen
     print(f'Średnia ocen wszystkich użytkowników z {przedmiot_name} wynosi {average}')
+    return average
